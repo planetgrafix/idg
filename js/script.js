@@ -1,1 +1,1 @@
-console.log("It begins");
+console.log("It should begin");
