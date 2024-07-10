@@ -19,4 +19,9 @@ html.w-editor [text-split] {
 
 .template {
   opacity: 0;
+}
+
+.hero__image {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }/*# sourceMappingURL=idg_style.css.map */
