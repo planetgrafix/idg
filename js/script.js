@@ -68,7 +68,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   $("[letters-slide-up]").each(function (index) {
     let tl = gsap.timeline({ paused: true });
-    tl.from($(this).find(".char"), {opacity: 0, yPercent: 100, duration: 1.2, ease: "expo.out", stagger: { amount: 0.6 } });
+    tl.from($(this).find(".char"), {opacity: 0, yPercent: 100, duration: 1.8, ease: "expo.out", stagger: { amount: 0.6 } });
     createScrollTrigger($(this), tl);
   });
 
