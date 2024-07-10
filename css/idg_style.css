@@ -3,6 +3,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+[text-split] {
+  opacity: 0;
+}
+
 html.w-editor [text-split] {
   opacity: 1;
 }
