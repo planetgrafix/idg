@@ -1,4 +1,4 @@
-console.log("Yes, it has begun.");
+console.log("Loaded");
 
 /* =========== LENIS SMOOTH SCROL ========== */
 
