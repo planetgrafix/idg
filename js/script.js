@@ -2,113 +2,132 @@
   $(document).ready(function () {
     console.log("Loaded 1");
 
-    /* =========== SPLIT TYPE ========== */
-
-  function split_type() {
-
-    // Split text into spans
-    let typeSplit = new SplitType("[text-split]", {
-      types: "words, chars",
-      tagName: "span",
-    });
-
-    // Link timelines to scroll position
-    function createScrollTrigger(triggerElement, timeline) {
-      // Reset tl when scroll out of view past bottom of screen
-      ScrollTrigger.create({
-        trigger: triggerElement,
-        start: "top bottom",
-        onLeaveBack: () => {
-          timeline.progress(0);
-          timeline.pause();
-        },
+    function split_type() {
+      // Split text into spans
+      let typeSplit = new SplitType("[text-split]", {
+        types: "words, chars",
+        tagName: "span",
       });
-      // Play tl when scrolled into view (60% from top of screen)
-      ScrollTrigger.create({
-        trigger: triggerElement,
-        start: "top 60%",
-        onEnter: () => timeline.play(),
+
+      // Link timelines to scroll position
+      function createScrollTrigger(triggerElement, timeline) {
+        // Reset tl when scroll out of view past bottom of screen
+        ScrollTrigger.create({
+          trigger: triggerElement,
+          start: "top bottom",
+          onLeaveBack: () => {
+            timeline.progress(0);
+            timeline.pause();
+          },
+        });
+        // Play tl when scrolled into view (60% from top of screen)
+        ScrollTrigger.create({
+          trigger: triggerElement,
+          start: "top 60%",
+          onEnter: () => timeline.play(),
+        });
+      }
+
+      $("[words-slide-up]").each(function (index) {
+        let tl = gsap.timeline({ paused: true });
+        tl.from($(this).find(".word"), {
+          opacity: 0,
+          yPercent: 100,
+          duration: 1.2,
+          ease: "expo.out",
+          stagger: { amount: 0.6 },
+        });
+        createScrollTrigger($(this), tl);
       });
+
+      $("[letters-slide-up]").each(function (index) {
+        let tl = gsap.timeline({ paused: true });
+        tl.from($(this).find(".char"), {
+          opacity: 0,
+          yPercent: 100,
+          duration: 1.8,
+          ease: "expo.out",
+          stagger: { amount: 0.6 },
+        });
+        createScrollTrigger($(this), tl);
+      });
+
+      $("[letters-fade-in]").each(function (index) {
+        let tl = gsap.timeline({ paused: true });
+        tl.from($(this).find(".char"), {
+          opacity: 0,
+          duration: 0.2,
+          ease: "power1.out",
+          stagger: { amount: 0.8 },
+        });
+        createScrollTrigger($(this), tl);
+      });
+
+      // Avoid flash of unstyled content
+      gsap.set("[text-split]", { opacity: 1 });
     }
 
-    $("[words-slide-up]").each(function (index) {
-      let tl = gsap.timeline({ paused: true });
-      tl.from($(this).find(".word"), {
-        opacity: 0,
-        yPercent: 100,
-        duration: 1.2,
-        ease: "expo.out",
-        stagger: { amount: 0.6 },
-      });
-      createScrollTrigger($(this), tl);
-    });
+    split_type();
 
-    $("[letters-slide-up]").each(function (index) {
-      let tl = gsap.timeline({ paused: true });
-      tl.from($(this).find(".char"), {
-        opacity: 0,
-        yPercent: 100,
-        duration: 1.8,
-        ease: "expo.out",
-        stagger: { amount: 0.6 },
-      });
-      createScrollTrigger($(this), tl);
-    });
+    function intro_animation() {
+      function attachAnim(container, path) {
+        return lottie.loadAnimation({
+          container: container,
+          renderer: "svg",
+          loop: false,
+          autoplay: false,
+          path: path,
+        });
+      }
 
-    $("[letters-fade-in]").each(function (index) {
-      let tl = gsap.timeline({ paused: true });
-      tl.from($(this).find(".char"), {
-        opacity: 0,
-        duration: 0.2,
-        ease: "power1.out",
-        stagger: { amount: 0.8 },
-      });
-      createScrollTrigger($(this), tl);
-    });
+      let logo = attachAnim(
+        $(".intro__logo-animation").get(0),
+        "https://uploads-ssl.webflow.com/664ad071171089b183595842/668ef0ca68b9f69066047b65_IDG%20Logo%20Animation%20with%20Text%20Fable%2001.lottie.json"
+      );
 
-    // Avoid flash of unstyled content
-    gsap.set("[text-split]", { opacity: 1 });
+      let hero = attachAnim(
+        $(".hero__animation").get(0),
+        "https://uploads-ssl.webflow.com/664ad071171089b183595842/666f2c997d2ddcf0bbc1b437_IDG%20-%20is%20Forever.lottie.json"
+      );
 
-  }
+      let tl = gsap.timeline(
+        
+      );
+      tl.set(".hero__title", { opacity: 0 }) 
+        .call(() => {
+          logo.play();
+        })
+        .to({}, { duration: 3 })
+        .to(
+          ".intro__section",
+          { duration: 1, opacity: 0, ease: "power2.out" }, 
+        )
+        .call(() => {
+          gsap.to(".hero__title", {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+          gsap.from($(".hero__title").find(".char"), {
+            opacity: 0,
+            yPercent: 100,
+            duration: 2.8,
+            ease: "expo.out",
+            stagger: { amount: 0.6 },
+          });
+        }, null, "-=0.5")
 
-  
+        .call(() => {
+          hero.play();
+        }, null, "-=0.2")
 
-  function intro_animation() {
-
-    function attachAnim(container, path) {
-      return lottie.loadAnimation({
-        container: container,
-        renderer: "svg",
-        loop: false,
-        autoplay: false,
-        path: path
-      });
+        .from(
+          ".intro__logo-animation",
+          { duration: 1, opacity: 1, ease: "power2.out" }
+        );
     }
 
-    let logo = attachAnim(
-      $('.intro__logo-animation').get(0), 
-      'https://uploads-ssl.webflow.com/664ad071171089b183595842/668ef0ca68b9f69066047b65_IDG%20Logo%20Animation%20with%20Text%20Fable%2001.lottie.json'
-    );
-
-    logo.play();
-
-    hero = attachAnim($('.hero__animation').get(0),
-      'https://uploads-ssl.webflow.com/664ad071171089b183595842/666f2c997d2ddcf0bbc1b437_IDG%20-%20is%20Forever.lottie.json');
-   
-
-    logo.addEventListener('complete', function() {
-      console.log('animation complete');
-      $('.intro__section').addClass('animation-complete');
-      split_type();
-      hero.play();
-    });
-
-  }
-
-  intro_animation();
-
-
-
+    intro_animation();
   });
 })(jQuery);
 
