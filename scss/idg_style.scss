@@ -10,6 +10,10 @@ html.w-editor [text-split] {
   opacity: 1;
 }
 
+.wf-design-mode .intro__section {
+  display: none;
+}
+
 .word {
   overflow: hidden;
   transform-origin: bottom;
