@@ -21,7 +21,7 @@ html.w-editor [text-split] {
   opacity: 0;
 }
 
-.hero__image {
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+.invisible {
+  opacity: 0;
+  visibility: hidden;
 }/*# sourceMappingURL=idg_style.css.map */
