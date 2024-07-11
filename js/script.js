@@ -52,18 +52,27 @@
           stagger: { amount: 0.6 },
         }, "<1")
 
-        
+        .from(
+          ".nav__logo",
+          { duration: 1, 
+            opacity: 0,
+            y: -30, 
+            ease: "power2.out" 
+          }, "<0.5")
+
+        .from(
+          ".nav__menu",
+          { duration: 1, 
+            opacity: 0,
+            y: -30, 
+            ease: "power2.out" 
+          }, "<")
 
         .call(() => {
           hero.play();
-        }, null, "<0.3")
+        }, null, "<0.3");
 
-        .from(
-          ".intro__logo-animation",
-          { duration: 1, 
-            opacity: 1, 
-            ease: "power2.out" }
-        );
+        
     }
 
     intro_animation();
