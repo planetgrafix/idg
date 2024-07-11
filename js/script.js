@@ -90,9 +90,7 @@
         "https://uploads-ssl.webflow.com/664ad071171089b183595842/666f2c997d2ddcf0bbc1b437_IDG%20-%20is%20Forever.lottie.json"
       );
 
-      let tl = gsap.timeline(
-        
-      );
+      let tl = gsap.timeline();
       tl.set(".hero__title", { opacity: 0 }) 
         .call(() => {
           logo.play();
@@ -100,7 +98,7 @@
         .to({}, { duration: 3 })
         .to(
           ".intro__section",
-          { duration: 1, opacity: 0, ease: "power2.out" }, 
+          { duration: 1, autoAlpha: 0, ease: "power2.out", }, 
         )
         .call(() => {
           gsap.to(".hero__title", {
