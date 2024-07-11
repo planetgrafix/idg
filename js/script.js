@@ -90,38 +90,46 @@
         "https://uploads-ssl.webflow.com/664ad071171089b183595842/666f2c997d2ddcf0bbc1b437_IDG%20-%20is%20Forever.lottie.json"
       );
 
+      hero.setSpeed(1.6);
+
       let tl = gsap.timeline();
-      tl.set(".hero__title", { opacity: 0 }) 
-        .call(() => {
+      tl.call(() => {
           logo.play();
         })
         .to({}, { duration: 3 })
         .to(
           ".intro__section",
-          { duration: 1, autoAlpha: 0, ease: "power2.out", }, 
+          { duration: 1, 
+            autoAlpha: 0, 
+            ease: "power2.out", }, 
         )
-        .call(() => {
-          gsap.to(".hero__title", {
-            opacity: 1,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-          gsap.from($(".hero__title").find(".char"), {
-            opacity: 0,
-            yPercent: 100,
-            duration: 2.8,
-            ease: "expo.out",
-            stagger: { amount: 0.6 },
-          });
-        }, null, "-=0.5")
+
+        .from('.hero__image', { 
+          duration: 2, 
+          opacity: 0, 
+          y:-30, 
+          stagger: { each: 0.2 }, 
+          ease: "power2.out" }, "-=0.5")
+
+        .from($(".hero__title").find(".char"), {
+          opacity: 0,
+          yPercent: 100,
+          duration: 2.8,
+          ease: "expo.out",
+          stagger: { amount: 0.6 },
+        }, "<1")
+
+        
 
         .call(() => {
           hero.play();
-        }, null, "-=0.2")
+        }, null, "<0.3")
 
         .from(
           ".intro__logo-animation",
-          { duration: 1, opacity: 1, ease: "power2.out" }
+          { duration: 1, 
+            opacity: 1, 
+            ease: "power2.out" }
         );
     }
 
