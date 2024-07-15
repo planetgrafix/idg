@@ -1,8 +1,17 @@
 (function ($) {
   $(document).ready(function () {
 
-    //gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
+    const smoother = ScrollSmoother.create({
+      wrapper: "#smooth-wrapper",
+      content: "#smooth-content",
+      smooth: 1,
+      normalizeScroll: true, // prevents address bar from showing/hiding on most devices, solves various other browser inconsistencies
+      ignoreMobileResize: true, // skips ScrollTrigger.refresh() on mobile resizes from address bar showing/hiding
+      effects: true,
+      preventDefault: true
+     });
 
     console.log("Loaded");
 
@@ -82,12 +91,21 @@
     intro_animation();
   });
 
+  //$('.intro__section').remove();
+
   function split_type() {
     // Split text into spans
     let typeSplit = new SplitType("[text-split]", {
       types: "words, chars",
       tagName: "span"
     });
+
+    // let typeSplit = new SplitText("[text-split]", { 
+    //   type: "words, chars", 
+    //   tag: "span",
+    //   wordsClass: "word",
+    //   charsClass: "char"
+    // });
 
     // Link timelines to scroll position
     function createScrollTrigger(triggerElement, timeline) {
