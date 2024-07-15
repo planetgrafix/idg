@@ -8,10 +8,12 @@
 
 (function ($) {
   $(document).ready(function () {
+    var smoother;
+
     function init() {
       gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
-      const smoother = ScrollSmoother.create({
+      smoother = ScrollSmoother.create({
         wrapper: "#smooth-wrapper",
         content: "#smooth-content",
         smooth: 1,
