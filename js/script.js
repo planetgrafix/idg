@@ -124,7 +124,7 @@
         ScrollTrigger.create({
           trigger: triggerElement,
           start: "top 90%",
-          markers: true,
+          markers: false,
           onEnter: () => {
             timeline.play();
           },
