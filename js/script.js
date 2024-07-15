@@ -8,33 +8,37 @@
 
 (function ($) {
   $(document).ready(function () {
-    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
+    function init() {
+      gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
-    const smoother = ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1,
-      normalizeScroll: true, // prevents address bar from showing/hiding on most devices, solves various other browser inconsistencies
-      ignoreMobileResize: true, // skips ScrollTrigger.refresh() on mobile resizes from address bar showing/hiding
-      effects: true,
-      preventDefault: true
-    });
+      const smoother = ScrollSmoother.create({
+        wrapper: "#smooth-wrapper",
+        content: "#smooth-content",
+        smooth: 1,
+        normalizeScroll: true, // prevents address bar from showing/hiding on most devices, solves various other browser inconsistencies
+        ignoreMobileResize: true, // skips ScrollTrigger.refresh() on mobile resizes from address bar showing/hiding
+        effects: true,
+        preventDefault: true,
+      });
 
-    smoother.paused(true);
-    smoother.scrollTo(0);
+      // note: this should only pause on home
+      smoother.paused(true);
+      smoother.scrollTo(0);
 
-    console.log("Loaded");
+      console.log("Loaded");
 
-    let typeSplit = new SplitText("[text-split]", { 
-      type: "words, chars", 
-      wordsClass: "word",
-      charsClass: "char"
-    });
+      let typeSplit = new SplitText("[text-split]", {
+        type: "words, chars",
+        wordsClass: "word",
+        charsClass: "char",
+      });
 
-    gsap.set("[text-split]", { opacity: 1 });
+      gsap.set("[text-split]", { opacity: 1 });
+    }
+
+    init();
 
     function intro_animation() {
-
       function attachAnim(container, path) {
         return lottie.loadAnimation({
           container: container,
@@ -120,7 +124,6 @@
     intro_animation();
 
     function text_animations() {
-
       // Link timelines to scroll position
       function createScrollTrigger(triggerElement, timeline) {
         // Play tl when scrolled into view (60% from top of screen)
@@ -133,7 +136,7 @@
           },
         });
       }
-  
+
       $("[words-slide-up]").each(function (index) {
         let tl = gsap.timeline({ paused: true });
         tl.from($(this).find(".word"), {
@@ -145,7 +148,7 @@
         });
         createScrollTrigger($(this), tl);
       });
-  
+
       $("[letters-slide-up]").each(function (index, element) {
         let tl = gsap.timeline({ paused: true });
         tl.from($(this).find(".char"), {
@@ -157,7 +160,7 @@
         });
         createScrollTrigger($(this), tl);
       });
-  
+
       $("[letters-fade-in]").each(function (index) {
         let tl = gsap.timeline({ paused: true });
         tl.from($(this).find(".char"), {
@@ -168,17 +171,10 @@
         });
         createScrollTrigger($(this), tl);
       });
-  
-      
     }
-    
-    setTimeout(function (){
+
+    setTimeout(function () {
       text_animations();
     }, 100);
-    
-
-
   });
 })(jQuery);
-
-
