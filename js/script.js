@@ -1,11 +1,3 @@
-// set scroll top to 0 and disable scroll
-// window.onload = function () {
-//   window.scrollTo(0, 0);
-//   window.onscroll = function () {
-//     window.scrollTo(0, 0);
-//   };
-// };
-
 (function ($) {
   $(document).ready(function () {
     var smoother;
