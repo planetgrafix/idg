@@ -1,6 +1,13 @@
+// set scroll top to 0 and disable scroll
+// window.onload = function () {
+//   window.scrollTo(0, 0);
+//   window.onscroll = function () {
+//     window.scrollTo(0, 0);
+//   };
+// };
+
 (function ($) {
   $(document).ready(function () {
-
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
     const smoother = ScrollSmoother.create({
@@ -11,7 +18,12 @@
       ignoreMobileResize: true, // skips ScrollTrigger.refresh() on mobile resizes from address bar showing/hiding
       effects: true,
       preventDefault: true
-     });
+    });
+
+    smoother.paused(true);
+    smoother.scrollTo(0);
+
+    
 
     console.log("Loaded");
 
@@ -40,76 +52,77 @@
 
       let tl = gsap.timeline();
       tl.call(() => {
-          logo.play();
-        })
+        logo.play();
+      })
         .to({}, { duration: 3 })
-        .to(
-          ".intro__section",
-          { duration: 1, 
-            autoAlpha: 0, 
-            ease: "power2.out", }, 
+        .to(".intro__section", {
+          duration: 1,
+          autoAlpha: 0,
+          ease: "power2.out",
+        })
+
+        .from(
+          ".hero__image",
+          {
+            duration: 2,
+            opacity: 0,
+            y: -30,
+            stagger: { each: 0.2 },
+            ease: "power2.out",
+          },
+          "-=0.5"
         )
 
-        .from('.hero__image', { 
-          duration: 2, 
-          opacity: 0, 
-          y:-30, 
-          stagger: { each: 0.2 }, 
-          ease: "power2.out" }, "-=0.5")
-
-        .from($(".hero__title").find(".char"), {
-          opacity: 0,
-          yPercent: 100,
-          duration: 2.8,
-          ease: "expo.out",
-          stagger: { amount: 0.6 },
-        }, "<1")
+        .from(
+          $(".hero__title").find(".char"),
+          {
+            opacity: 0,
+            yPercent: 100,
+            duration: 2.8,
+            ease: "expo.out",
+            stagger: { amount: 0.6 },
+          },
+          "<1"
+        )
 
         .from(
           ".nav__logo",
-          { duration: 1, 
-            opacity: 0,
-            y: -30, 
-            ease: "power2.out" 
-          }, "<0.5")
+          { duration: 1, opacity: 0, y: -30, ease: "power2.out" },
+          "<0.5"
+        )
 
         .from(
           ".nav__menu",
-          { duration: 1, 
-            opacity: 0,
-            y: -30, 
-            ease: "power2.out" 
-          }, "<")
+          { duration: 1, opacity: 0, y: -30, ease: "power2.out" },
+          "<"
+        )
 
-        .call(() => {
-          hero.play();
-        }, null, "<0.3");
+        .call(
+          () => {
+            hero.play();
+          },
+          null,
+          "<0.3"
+        );
 
-        
+        // on complete
+        tl.eventCallback("onComplete", function() {
+          smoother.paused(false);
+        });
     }
 
     intro_animation();
   });
 
-  //$('.intro__section').remove();
-
   function split_type() {
     // Split text into spans
     let typeSplit = new SplitType("[text-split]", {
       types: "words, chars",
-      tagName: "span"
+      tagName: "span",
     });
-
-    // let typeSplit = new SplitText("[text-split]", { 
-    //   type: "words, chars", 
-    //   tag: "span",
-    //   wordsClass: "word",
-    //   charsClass: "char"
-    // });
 
     // Link timelines to scroll position
     function createScrollTrigger(triggerElement, timeline) {
-
       // Play tl when scrolled into view (60% from top of screen)
       ScrollTrigger.create({
         trigger: triggerElement,
@@ -117,8 +130,7 @@
         markers: false,
         onEnter: () => {
           timeline.play();
-          
-        }
+        },
       });
     }
 
@@ -163,4 +175,5 @@
 
   split_type();
 })(jQuery);
+
 
