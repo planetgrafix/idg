@@ -25,7 +25,16 @@
 
     console.log("Loaded");
 
+    let typeSplit = new SplitText("[text-split]", { 
+      type: "words, chars", 
+      wordsClass: "word",
+      charsClass: "char"
+    });
+
+    gsap.set("[text-split]", { opacity: 1 });
+
     function intro_animation() {
+
       function attachAnim(container, path) {
         return lottie.loadAnimation({
           container: container,
@@ -57,6 +66,10 @@
           duration: 1,
           autoAlpha: 0,
           ease: "power2.out",
+          // on complete
+          onComplete: function () {
+            smoother.paused(false);
+          },
         })
 
         .from(
@@ -102,77 +115,70 @@
           null,
           "<0.3"
         );
-
-        // on complete
-        tl.eventCallback("onComplete", function() {
-          smoother.paused(false);
-        });
     }
 
     intro_animation();
-  });
 
-  function split_type() {
+    function text_animations() {
 
-    let typeSplit = new SplitText("[text-split]", { 
-      type: "words, chars", 
-      wordsClass: "word",
-      charsClass: "char"
-    });
-
-    // Link timelines to scroll position
-    function createScrollTrigger(triggerElement, timeline) {
-      // Play tl when scrolled into view (60% from top of screen)
-      ScrollTrigger.create({
-        trigger: triggerElement,
-        start: "top 85%",
-        markers: false,
-        onEnter: () => {
-          timeline.play();
-        },
+      // Link timelines to scroll position
+      function createScrollTrigger(triggerElement, timeline) {
+        // Play tl when scrolled into view (60% from top of screen)
+        ScrollTrigger.create({
+          trigger: triggerElement,
+          start: "top 90%",
+          markers: true,
+          onEnter: () => {
+            timeline.play();
+          },
+        });
+      }
+  
+      $("[words-slide-up]").each(function (index) {
+        let tl = gsap.timeline({ paused: true });
+        tl.from($(this).find(".word"), {
+          opacity: 0,
+          yPercent: 100,
+          duration: 1.2,
+          ease: "expo.out",
+          stagger: { amount: 0.6 },
+        });
+        createScrollTrigger($(this), tl);
       });
+  
+      $("[letters-slide-up]").each(function (index, element) {
+        let tl = gsap.timeline({ paused: true });
+        tl.from($(this).find(".char"), {
+          opacity: 0,
+          yPercent: 100,
+          duration: 1.8,
+          ease: "expo.out",
+          stagger: { amount: 0.6 },
+        });
+        createScrollTrigger($(this), tl);
+      });
+  
+      $("[letters-fade-in]").each(function (index) {
+        let tl = gsap.timeline({ paused: true });
+        tl.from($(this).find(".char"), {
+          opacity: 0,
+          duration: 0.2,
+          ease: "power1.out",
+          stagger: { amount: 0.8 },
+        });
+        createScrollTrigger($(this), tl);
+      });
+  
+      
     }
+    
+    setTimeout(function (){
+      text_animations();
+    }, 100);
+    
 
-    // $("[words-slide-up]").each(function (index) {
-    //   let tl = gsap.timeline({ paused: true });
-    //   tl.from($(this).find(".word"), {
-    //     opacity: 0,
-    //     yPercent: 100,
-    //     duration: 1.2,
-    //     ease: "expo.out",
-    //     stagger: { amount: 0.6 },
-    //   });
-    //   createScrollTrigger($(this), tl);
-    // });
 
-    $("[letters-slide-up]").each(function (index, element) {
-      let tl = gsap.timeline({ paused: true });
-      tl.from($(this).find(".char"), {
-        opacity: 0,
-        yPercent: 100,
-        duration: 1.8,
-        ease: "expo.out",
-        stagger: { amount: 0.6 },
-      });
-      createScrollTrigger($(this), tl);
-    });
-
-    $("[letters-fade-in]").each(function (index) {
-      let tl = gsap.timeline({ paused: true });
-      tl.from($(this).find(".char"), {
-        opacity: 0,
-        duration: 0.2,
-        ease: "power1.out",
-        stagger: { amount: 0.8 },
-      });
-      createScrollTrigger($(this), tl);
-    });
-
-    // Avoid flash of unstyled content
-    gsap.set("[text-split]", { opacity: 1 });
-  }
-
-  split_type();
+  });
 })(jQuery);
 
 
