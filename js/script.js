@@ -138,7 +138,7 @@
           yPercent: 100,
           duration: 1.2,
           ease: "expo.out",
-          stagger: { amount: 0.6 },
+          stagger: { amount: 0.3 },
         });
         createScrollTrigger($(this), tl);
       });
@@ -169,6 +169,6 @@
 
     setTimeout(function () {
       text_animations();
-    }, 100);
+    }, 300);
   });
 })(jQuery);
