@@ -104,4 +104,21 @@ html.w-editor [text-split] {
 .hero__images {
   min-height: 63vw;
   margin-bottom: 0 !important;
+}
+
+.tagline {
+  position: relative;
+}
+.tagline:before, .tagline:after {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 1px;
+  background: #dbdbdc;
+  bottom: 0;
+  left: 0;
+}
+.tagline:after {
+  width: 20%;
+  background: #a3a5a7;
 }/*# sourceMappingURL=idg_style.css.map */
