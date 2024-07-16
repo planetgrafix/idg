@@ -10,8 +10,8 @@
         wrapper: "#smooth-wrapper",
         content: "#smooth-content",
         smooth: 1,
-        normalizeScroll: true, // prevents address bar from showing/hiding on most devices, solves various other browser inconsistencies
-        ignoreMobileResize: true, // skips ScrollTrigger.refresh() on mobile resizes from address bar showing/hiding
+        normalizeScroll: true, 
+        ignoreMobileResize: true, 
         effects: true,
         preventDefault: true,
       });
@@ -40,12 +40,26 @@
         markers: false,
       });
 
-      smoother.effects(".hero__image.one", { speed: 1 });
-      smoother.effects(".hero__image.two", { speed: 0.9 });
-      smoother.effects(".hero__image.three", { speed: 1.1 });
-      smoother.effects(".hero__image.four", { speed: 0.8 });
+      ScrollTrigger.create({
+        trigger: "#smooth-wrapper",
+        start: "top top",
+        end: `top+=${vw * 0.65 }px top`,
+        scrub: 1,
+        onUpdate: (self) => {
+          gsap.set(".hero__image.two", { y: self.progress * 300 });
+        },
+        markers: false,
+      });
 
-      //smoother.effects(".hero__image.three img", { speed: "auto" });
+      // smoother.effects(".hero__image.one", { speed: 1 });
+      // smoother.effects(".hero__image.two", { speed: 0.9 });
+      // smoother.effects(".hero__image.three", { speed: 1.1 });
+      // smoother.effects(".hero__image.four", { speed: 0.8 });
+
+      smoother.effects(".hero__image.one img", { speed: "auto" });
+      smoother.effects(".hero__image.two img", { speed: "auto" });
+      smoother.effects(".hero__image.three img", { speed: "auto" });
+      smoother.effects(".hero__image.four img", { speed: "auto" });
 
       // note: this should only pause on home
       smoother.paused(true);

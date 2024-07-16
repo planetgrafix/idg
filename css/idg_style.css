@@ -30,6 +30,78 @@ html.w-editor [text-split] {
   visibility: hidden;
 }
 
+.hero__image.one {
+  overflow: hidden;
+  height: 12vw;
+}
+.hero__image.one img {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 110%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -1;
+}
+
+.hero__image.two {
+  overflow: hidden;
+  height: 14vw;
+}
+.hero__image.two img {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 110%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -1;
+}
+
+.hero__image.three {
+  overflow: hidden;
+  height: 39vw;
+}
+.hero__image.three img {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 110%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -1;
+}
+
+.hero__image.four {
+  overflow: hidden;
+  height: 23vw;
+}
+.hero__image.four img {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 110%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -1;
+}
+
 .heading-2 .word {
   padding-bottom: 0.08em;
+}
+
+.title__section {
+  position: absolute;
+  top: 0;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+.hero__title {
+  line-height: 0.74;
+}
+
+.hero__images {
+  min-height: 63vw;
+  margin-bottom: 0 !important;
 }/*# sourceMappingURL=idg_style.css.map */

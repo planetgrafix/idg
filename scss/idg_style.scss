@@ -49,19 +49,62 @@ html.w-editor [text-split] {
 //   backface-visibility: hidden;
 // }
 
-// .hero__image.three {
-//   overflow: hidden;
-//   height: 600px;
 
-//   img {
-//     position: absolute;
-//     bottom: 0;
-//     width: 100%;
-//     height: 120%;
-//     object-fit: cover;
-//     z-index: -1;
-//   }
-// }
+.hero__image.one {
+  overflow: hidden;
+  height: 12vw;
+
+  img {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 110%;
+    object-fit: cover;
+    z-index: -1;
+  }
+}
+
+.hero__image.two {
+  overflow: hidden;
+  height: 14vw;
+
+  img {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 110%;
+    object-fit: cover;
+    z-index: -1;
+  }
+}
+
+.hero__image.three {
+  overflow: hidden;
+  height: 39vw;
+
+  img {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 110%;
+    object-fit: cover;
+    z-index: -1;
+  }
+}
+
+.hero__image.four {
+  overflow: hidden;
+  height: 23vw;
+
+  img {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 110%;
+    object-fit: cover;
+    z-index: -1;
+  }
+}
 
 
   // [text-split] {
@@ -94,9 +137,18 @@ html.w-editor [text-split] {
   padding-bottom: 0.08em;
 }
 
-// .title__section {
-//   position: absolute;
-//   top: 0;
-//   left: 0 !important;
-//   right: 0 !important;
-// }
+.title__section {
+  position: absolute;
+  top: 0;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+.hero__title {
+  line-height: .74;
+}
+
+.hero__images {
+  min-height: 63vw;
+  margin-bottom: 0 !important;
+}
