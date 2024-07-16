@@ -28,4 +28,8 @@ html.w-editor [text-split] {
 .invisible {
   opacity: 0;
   visibility: hidden;
+}
+
+.heading-2 .word {
+  padding-bottom: 0.08em;
 }/*# sourceMappingURL=idg_style.css.map */

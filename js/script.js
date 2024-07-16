@@ -1,5 +1,6 @@
 (function ($) {
   $(document).ready(function () {
+   
     var smoother;
 
     function init() {
@@ -15,10 +16,36 @@
         preventDefault: true,
       });
 
+      const vw = Math.max(
+        document.documentElement.clientWidth || 0,
+        window.innerWidth || 0
+      );
+
+      // animate titles
+      ScrollTrigger.create({
+        trigger: "#smooth-wrapper",
+        start: "top top",
+        end: `top+=${vw * 0.35 }px top`,
+        scrub: 1,
+        onUpdate: (self) => {
+          gsap.set(".hero__title", { y: self.progress * 300 });
+          gsap.set(".hero__animation", { y: self.progress * 315 });
+
+          if (self.progress > 0.9) {
+            gsap.set(".title__section", { opacity: 0 });
+          } else {
+            gsap.set(".title__section", { opacity: 1 });
+          }
+        },
+        markers: false,
+      });
+
       smoother.effects(".hero__image.one", { speed: 1 });
       smoother.effects(".hero__image.two", { speed: 0.9 });
-      smoother.effects(".hero__image.three", { speed: 1 });
+      smoother.effects(".hero__image.three", { speed: 1.1 });
       smoother.effects(".hero__image.four", { speed: 0.8 });
+
+      //smoother.effects(".hero__image.three img", { speed: "auto" });
 
       // note: this should only pause on home
       smoother.paused(true);
@@ -174,6 +201,6 @@
 
     setTimeout(function () {
       text_animations();
-    }, 300);
+    }, 1000);
   });
 })(jQuery);
