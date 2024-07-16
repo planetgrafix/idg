@@ -47,6 +47,7 @@
         scrub: 1,
         onUpdate: (self) => {
           gsap.set(".hero__image.two", { y: self.progress * 300 });
+          gsap.set(".hero__image.four", { y: self.progress * 100 });
         },
         markers: false,
       });
