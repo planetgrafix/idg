@@ -15,6 +15,11 @@
         preventDefault: true,
       });
 
+      smoother.effects(".hero__image.one", { speed: 1 });
+      smoother.effects(".hero__image.two", { speed: 0.9 });
+      smoother.effects(".hero__image.three", { speed: 1 });
+      smoother.effects(".hero__image.four", { speed: 0.8 });
+
       // note: this should only pause on home
       smoother.paused(true);
       smoother.scrollTo(0);
